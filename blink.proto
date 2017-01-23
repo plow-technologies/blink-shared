@@ -1,0 +1,480 @@
+// Blink Roc Protocol
+// Copyright 2017 Plow Technologies LLC
+// All Rights Reserved
+
+
+
+// A Roc Device is the highest level object
+// in the message.  It contains all the meter info
+// as well as additonal information on reading a particular meter
+message RocDevice {
+
+  required string        locationIdentifier = 1;
+  repeated MeterRunEntry meterRuns          = 2;
+}
+
+
+
+
+
+
+
+
+
+// Meter Run Entries are the Key-Value pairs that define meter runs
+// in the RocDevice
+message MeterRunEntry {
+
+  required int64    key       = 1;
+  required MeterRun meterInfo = 2;
+}
+
+// Message MeterRun defines the fields that make up a particular meter
+// For some meter types, the fields are optional and will
+// be listed as such.
+//
+// The meaning of each field is constant regardless of meter type.
+// By getting rid of the addressing, interfacing with other devices
+// is highly simplified.
+message MeterRun {
+
+  required EFMReportInformation             efmData                       = 1;
+  required SystemParameters                 systemParameters              = 2;
+  required GeneralFlowParameters            generalFlowParameters         = 3;
+  required CalculatedFactors                calculatedFactors             = 4;
+  required InputPointDefinition             inputPointDefinition          = 5;
+  required DPInputPointDefinition           dpInputPointDefinition        = 6;
+  required PressureInputPointDefinition     pressureInputPointDefinition  = 7;
+  required TemperatureInputPointDefinition  tempInputPointDefinition      = 8;
+  required GasCompositionInMole             gasComposition                = 9;
+  repeated VolumeReport                     periodicVolumeReport          = 10;
+  repeated VolumeReport                     dailyVolumeReport             = 11;
+}
+
+// Message EFMReportinformation
+// This is general information concerning an EFM report
+message EFMReportInformation  {
+
+  required string  reportDataFile        = 1;
+  required RocTime reportStartTime       = 2;
+  required RocTime reportEndTime         = 3;
+  required string  meterDescription      = 4;
+  required string  runSelected           = 5;
+  // NOTE: meter tag, contract hour
+}
+
+// Message SystemParameters
+// This is information about the ROC and General Config
+message SystemParameters {
+
+  required uint32        deviceAddress            = 1;
+  required uint32        deviceGroup              = 2;
+  required string        stationName              = 3;
+  required uint32        activeMeterRuns          = 4;
+  required string        versionNameAndPartNumber = 5;
+  required string        manufacturingId          = 6;
+  required RocTime       timeCreated              = 7;
+  required uint32        maxMeterRuns             = 8;
+  required RocDeviceType deviceType               = 9;
+  required string        mpuLoading               = 10;
+  // NOTE: ROM Serial Number
+
+
+
+      // Nested Data Types
+      enum  RocDeviceType {
+              ROC103 = 1;
+              ROC104 = 2;
+              ROC107 = 3;
+              ROC800 = 4; }
+}
+
+
+
+// Message General Flow Parameters Meter
+
+message GeneralFlowParameters {
+  required CalculationMethodI   calculationMethod    = 1;
+  required CalculationMethodII  calculationMethod2   = 2;
+  required double               imp                  = 3;
+  required GeneralFlowOptions   options              = 4;
+  required double               pipeDiameter         = 5;
+  required MaterialType         pipeMaterial         = 6; // Check
+  required double               orificeReferenceTemp = 7;
+  required double               atmosphericPressure  = 8;
+  required double               heatingValue         = 9;
+  required double               specificHeatRatio    = 10;
+  required double               latitude             = 11;
+  required double               lowHwCutoff          = 12;
+  required double               lowAlarmFlow         = 13;
+  required CalibrationOptions   calibrationOptions   = 14;
+  required double               calibrationWeightsGravitationalAccelaration = 15;
+  required double               pipeReferenceTemp    = 16;
+  required double               orificeDiameter      = 17;
+  required MaterialType         orificeMaterial      = 18;
+  required double               baseOrContractTemp   = 19;
+  required double               specificGravity      = 20;
+  required double               viscosity            = 21;
+  required double               elevation            = 22;
+  required double               localGravitationalAcceleration = 23;
+  required AlarmCode            alarmCode            = 24;
+  required double               highAlarmFlow        = 25;
+  required double               userCorrectionFactor = 26;
+
+  // bit1 and bit3 are not used
+  message AlarmCode {
+    required bool lowAlarm                       = 1; // bit 0
+    required bool highAlarm                      = 2; // bit 2
+    required bool totalCountsRegisterDiscrepancy = 3; // bit 4
+    required bool flowRateRegisterDiscrepancy    = 4; // bit 5
+    required bool noFlow                         = 5; // bit 6
+    required bool manualMode                     = 7; // bit 7
+  }
+
+  enum MaterialType {
+    STAINLESS_STEEL     = 1;
+    MONEL               = 2;
+    CARBON_STEEL        = 3;
+    STAINLESS_STEEL_304 = 4;
+    STAINLESS_STEEL_316 = 5;
+    MONEL_400           = 6;
+  }
+
+  // Point Type 46: Parameter 4
+  // From spec, this is a binary type.
+  // But some of the values are better represented with enum
+  message GeneralFlowOptions {
+    required PressureTap    pressureTap                   = 1; // Bit 0
+    required Source         specificGravitySource         = 2; // Bit 1
+    required TapLocation    staticPressureTapLocation     = 3; // Bit 2
+    required PressureValue  staticPressureValue           = 4; // Bit 3
+    required Source         heatingValueSource            = 5; // Bit 4
+    required Source         gravitationalAccelSource      = 6; // Bit 5
+    required HeatingValue   heatingValueBasis             = 7; // Bit 6
+    required bool           logMethaneAdjustment          = 8; // Bit 7
+
+    enum PressureTap {
+      FLANGE = 1;
+      PIPE   = 2;
+    }
+
+    enum PressureValue {
+      GAUGE    = 1;
+      ABSOLUTE = 2;
+    }
+
+    enum HeatingValue {
+      MASS   = 1;
+      VOLUME = 2;
+    }
+
+    enum TapLocation {
+      DOWNSTREAM   = 1;
+      UPSTREAM     = 2;
+    }
+
+    enum Source {
+      CALCULATED = 1;
+      ENTERED    = 2;
+    }
+  }
+
+  // Type 45: Param 0
+  message CalibrationOptions {
+    required string pfDeadweightCalibrator = 1;
+    required string hwDeadweightCalibrator = 2;
+  }
+}
+
+message CalculatedFactors {
+  required double flowRatePerDay          = 1;
+  required double flowRatePerHour         = 2;
+  required double energyRatePerDay        = 3;
+  required double energyRatePerHour       = 4;
+  required double pressureExtension       = 5;
+  required double expansionFactor         = 6;
+  required double cdFT                    = 7;
+  required double fn                      = 8;
+  required double fpb                     = 9;
+  required double ftb                     = 10;
+  required double ftf                     = 11;
+  required double fgr                     = 12;
+  required double fpv                     = 13;
+  required double zs                      = 14;
+  required double zb                      = 15;
+  required double zf1                     = 16;
+  required double imv                     = 17;
+  required double density                 = 18;
+  required double reynoldsNumber          = 19;
+  required double baseDensity             = 20;
+  required double pfwlStatic              = 21;
+  required double fpwlDifferential        = 22;
+  required double flowToday               = 23;
+  required double flowYesterday           = 24;
+  required double flowMonth               = 25;
+  required double flowPrevMonth           = 26;
+  required double energyToday             = 27;
+  required double energyYesterday         = 28;
+  required double energyMonth             = 29;
+  required double energyPrevMonth         = 30;
+}
+
+
+message InputPointDefinition {
+  required bool   enableStackedHw         = 1;
+  required string lowHwTLP                = 2; // Not sure
+  required TLP    hwTLP                   = 3;
+  required TLP    pfTLP                   = 4;
+  required TLP    tfTLP                   = 5;
+  required double highHwSetpoint          = 6;
+  required double lowHwSetpoint           = 7;
+  required double hw                      = 8;
+  required double pfStaticPressure        = 9;
+  required double tfTemperature           = 10;
+}
+
+message DPInputPointDefinition {
+  required string   pointTagId              = 1;
+  required uint32   scanPeriod              = 2;
+  required uint32   adjustedAd0Percentage   = 3;
+  required double   lowReadingEu            = 4;
+  required double   lowAlarmEu              = 5;
+  required double   lowLowAlarmEu           = 6;
+  required double   rateAlarmEu             = 7;
+  required double   filteredEuValue         = 8;
+  required uint32   alarmCode               = 9;
+  required uint32   actualScanTime          = 10;
+  required UnitCode units                   = 11;
+  required uint32   filter                  = 12;
+  required uint32   adjustedAd100Percentage = 13;
+  required double   highReadingEu           = 14;
+  required double   highAlarmEu             = 15;
+  required double   highHighAlarmEu         = 16;
+  required double   alarmDeadband           = 17;
+  required uint32   mode                    = 18;
+  required uint32   rawAdInput              = 19;
+}
+
+message PressureInputPointDefinition {
+  required string   pointTagId              = 1;
+  required uint32   scanPeriod              = 2;
+  required uint32   adjustedAd0Percentage   = 3;
+  required double   lowReadingEu            = 4;
+  required double   lowAlarmEu              = 5;
+  required double   lowLowAlarmEu           = 6;
+  required double   rateAlarmEu             = 7;
+  required double   filteredEuValue         = 8;
+  required uint32   alarmCode               = 9;
+  required uint32   actualScanTime          = 10;
+  required UnitCode units                   = 11;
+  required uint32   filter                  = 12;
+  required uint32   adjustedAd100Percentage = 13;
+  required double   highReadingEu           = 14;
+  required double   highAlarmEu             = 15;
+  required double   highHighAlarmEu         = 16;
+  required double   alarmDeadband           = 17;
+  required uint32   mode                    = 18;
+  required uint32   rawAdInput              = 19;
+}
+
+
+message TemperatureInputPointDefinition {
+  required string   pointTagId              = 1;
+  required uint32   scanPeriod              = 2;
+  required uint32   adjustedAd0Percentage   = 3;
+  required double   lowReadingEu            = 4;
+  required double   lowAlarmEu              = 5;
+  required double   lowLowAlarmEu           = 6;
+  required double   rateAlarmEu             = 7;
+  required double   filteredEuValue         = 8;
+  required uint32   alarmCode               = 9;
+  required uint32   actualScanTime          = 10;
+  required UnitCode units                   = 11;
+  required uint32   filter                  = 12;
+  required uint32   adjustedAd100Percentage = 13;
+  required double   highReadingEu           = 14;
+  required double   highAlarmEu             = 15;
+  required double   highHighAlarmEu         = 16;
+  required double   alarmDeadband           = 17;
+  required uint32   mode                    = 18;
+  required uint32   rawAdInput              = 19;
+}
+
+message GasCompositionInMole {
+  required double nitrogen        = 1;
+  required double hydrogenSulfide = 2;
+  required double helium          = 3;
+  required double ethane          = 4;
+  required double nButane         = 5;
+  required double nPentane        = 6;
+  required double nHexane         = 7;
+  required double nOctane         = 8;
+  required double nDecane         = 9;
+  required double carbonMonoxide  = 10;
+  required double carbonDioxide   = 11;
+  required double water           = 12;
+  required double methane         = 13;
+  required double propane         = 14;
+  required double iButane         = 15;
+  required double iPentane        = 16;
+  required double nHeptane        = 17;
+  required double nNonane         = 18;
+  required double oxygen          = 19;
+  required double hydrogen        = 20;
+}
+
+message VolumeReport {
+  required RocTime dateTime             = 1; // Should use RocTime?
+  required double  flowMinutes          = 2;
+  required double  avgInH20             = 3;
+  required double  avgPsi               = 4;
+  required double  avgDegree            = 5;
+  required double  multiplierValue      = 6;
+  required double  pressureExtension    = 7;
+  required double  volumeAccumMcf       = 8;
+  required double  energyAccumMmbtu     = 9;
+}
+
+
+//--------------------------------------------------
+//Other Type Wrappers
+//--------------------------------------------------
+
+// ROC Time is represented as a 64 bit unsigned int
+// Recorded down to the second and expecting an epoc (1970) start
+// time.
+message RocTime {
+  required uint64 epochTime = 1;
+}
+
+
+// Point Type 46, Parameter 2 and 3
+// Calculation Method shows what standard was used to make
+// these measurements
+
+message CalculationMethodI {
+  required CalcMode     calcManualMode    = 1; // Bit 0
+  required FlowMethod   flowMethod        = 2; // Bit 1
+  required bool         logMeter          = 3; // Bit 2
+  required Measurement  unitMeasurement   = 4; // Bit 3
+  required bool         alarming          = 5; // Bit 4
+  required bool         rbxClear          = 6; // Bit 5
+  required bool         rbxSet            = 7; // Bit 6
+
+  oneof calcStandard {
+    FlowCalcManualMode           flowCalcManualMode           = 8;
+    TurbineCalcStandard          turbineCalcStandard          = 9;
+    DifferentialFlowCalcStandard differentialFlowCalcStandard = 10;
+  }
+
+  message FlowCalcManualMode {
+    required FlowCalculation mode = 1;
+
+    enum FlowCalculation {
+      NORMAL = 1;
+      MANUAL = 2;
+    }
+  }
+
+  message TurbineCalcStandard {
+    required TurbineCalculation mode = 1;
+
+    enum TurbineCalculation {
+      AGA7    = 1;
+      ISO9951 = 2;
+    }
+  }
+
+  message DifferentialFlowCalcStandard {
+    required FlowCalculation mode = 1;
+
+    enum FlowCalculation {
+      AGA3    = 1;
+      ISO5167 = 2;
+    }
+  }
+
+  enum CalcMode {
+    NORMAL = 1;
+    MANUAL = 2;
+  }
+
+  enum FlowMethod {
+    DIFFERENTIAL = 1;
+    LINEAR       = 2;
+  }
+
+  enum Measurement {
+    ENGLISH = 1;
+    METRIC  = 2;
+  }
+}
+
+
+// Point Type 46, Parameter 2 and 3
+// Calculation Method shows what standard was used to make
+// these measurements
+message CalculationMethodII {
+  required AGA8Method            characterizationMethod      = 1; // Bit 0
+  required AGA8GrossMethod       grossCharacterizationMethod = 2; // Bit 1
+  required Source                atmosphericPressureSource   = 3; // Bit 2
+  required HeatingValue          heatingValueBasis           = 4; // Bit 3
+  required HeatingValueDelivered heatingValueDeliveredBasis  = 5; // Bit 4
+  required GasQuality            gasQuality                  = 6; // Bit 5
+  required KFactor               kFactor                     = 7; // Bit 7
+
+  enum AGA8Method {
+    DETAILED = 1;
+    GROSS    = 2;
+  }
+
+  enum AGA8GrossMethod {
+    GROSS1 = 1;
+    GROSS2 = 2;
+  }
+
+  enum Source {
+    CALCULATED = 1;
+    ENTERED    = 2;
+  }
+
+  enum HeatingValue {
+    DRY = 1;
+    WET = 2;
+  }
+
+  enum HeatingValueDelivered {
+    IGNORE    = 1;
+    DELIVERED = 2;
+  }
+
+  enum GasQuality {
+    CONSTANT = 1;
+    LIVE     = 2;
+  }
+
+  enum KFactor {
+    SINGLE   = 1;
+    MULTIPLE = 2;
+  }
+}
+
+
+
+// Type, Point or Logical Number, Parameter Number (TLP) data type
+// Based on the specs, each type should be uint8 but protobuf does not support that
+message TLP {
+  required uint32 type      = 1;
+  required uint32 logical   = 2;
+  required uint32 parameter = 3;
+}
+
+enum UnitCode {
+  PSIG      = 1;
+  PSIA      = 2;
+  INH20     = 3;
+  DEGREEF   = 4;
+  PERCENT   = 5;
+  VOLTS     = 6;
+  MILLIAMPS = 7;
+}

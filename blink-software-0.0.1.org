@@ -1,0 +1,61 @@
+* Blink, a link from Bluetooth to Scada.
+** Processes
+*** Security
++ encrypted data transfer 
++ authentication tokens
+*** Configuration
++ Create new config
++ Read config
++ Update existing config
++ Delete config
+*** Roc Communication
+Actual read fields will be determined by the config file.
+But we still need to figure out what TLP should be the defaults
+**** Read EFM Fields
+[[80946809.pdf][Example Measurement Fields]]
+**** Write EFM Fields
+***** TODO Get list of fields that need to be writeable
+**** Read History fields
+***** TODO Configure our data pulling device to pull from the ROC.
+**** Erase History fields
+***** TODO Tester application will need an erase feature.
+*** Device Update
++  Need a way to quickly change binaries on devices.
+*** Device Tracking
++ Field devices need an (encrypted) active/inactive.
+*** BLE
++ Upload data to the ipad.
++ Download (small) changes from the ipad.
+*** Diagnostics 
+Need a set of error codes for...
+**** Scada Read monitoring
++ Read failure logs
++ Unexpected datatypes
++ Write failure
++ Request access failures
+**** BLE and End Device monitoring
++ Attempted logins
++ Disconnect reasons
+**** Internal Monitoring
++ Battery Life
++ Serial Cable checks
++ Software updates
+** Data Models
+*** Hardware description model
+Specific details about how to access the hardware
+will be in this layer. TLP and op code info.
+*** Endpoint Description model.
+[[blink-ble-services.md][A Description Protocol]] will be designed that 
+should simplify the process of using the data for
+end devices.  
+
+*** Meta Description model
+Information concerning what hardware is at a place.
+What version of software is on the device.
+** User Interface
+*** Wifi interface
+*** BLE interface
+*** USB interface
+** API
+** Serial Numbers, passwords and logins.
+
