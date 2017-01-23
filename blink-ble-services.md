@@ -20,5 +20,5 @@ The Blink BLE platform is comprised of several categories of services.
   
 * Every new SCADA line will have its own service and protobuffer.  
 
-## Fisher Roc Bluetooth record
+  + [Fisher Roc Bluetooth record](blink.proto)
 
