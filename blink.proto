@@ -76,7 +76,7 @@ message SystemParameters {
   required RocTime       timeCreated              = 7;
   required uint32        maxMeterRuns             = 8;
   required RocDeviceType deviceType               = 9;
-  required string        mpuLoading               = 10;
+  required double        mpuLoading               = 10;
   // NOTE: ROM Serial Number
 
 
@@ -181,8 +181,8 @@ message GeneralFlowParameters {
 
   // Type 45: Param 0
   message CalibrationOptions {
-    required string pfDeadweightCalibrator = 1;
-    required string hwDeadweightCalibrator = 2;
+    required bool pfDeadweightCalibrator = 1;
+    required bool hwDeadweightCalibrator = 2;
   }
 }
 
@@ -222,7 +222,7 @@ message CalculatedFactors {
 
 message InputPointDefinition {
   required bool   enableStackedHw         = 1;
-  required string lowHwTLP                = 2; // Not sure
+  required TLP    lowHwTLP                = 2; // Not sure
   required TLP    hwTLP                   = 3;
   required TLP    pfTLP                   = 4;
   required TLP    tfTLP                   = 5;
