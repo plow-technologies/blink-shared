@@ -234,70 +234,70 @@ message InputPointDefinition {
 }
 
 message DPInputPointDefinition {
-  required string   pointTagId              = 1;
-  required uint32   scanPeriod              = 2;
-  required uint32   adjustedAd0Percentage   = 3;
-  required double   lowReadingEu            = 4;
-  required double   lowAlarmEu              = 5;
-  required double   lowLowAlarmEu           = 6;
-  required double   rateAlarmEu             = 7;
-  required double   filteredEuValue         = 8;
-  required uint32   alarmCode               = 9;
-  required uint32   actualScanTime          = 10;
-  required UnitCode units                   = 11;
-  required uint32   filter                  = 12;
-  required uint32   adjustedAd100Percentage = 13;
-  required double   highReadingEu           = 14;
-  required double   highAlarmEu             = 15;
-  required double   highHighAlarmEu         = 16;
-  required double   alarmDeadband           = 17;
-  required uint32   mode                    = 18;
-  required uint32   rawAdInput              = 19;
+  string   pointTagId              = 1;
+  uint32   scanPeriod              = 2;
+  uint32   adjustedAd0Percentage   = 3;
+  double   lowReadingEu            = 4;
+  double   lowAlarmEu              = 5;
+  double   lowLowAlarmEu           = 6;
+  double   rateAlarmEu             = 7;
+  double   filteredEuValue         = 8;
+  uint32   alarmCode               = 9;
+  uint32   actualScanTime          = 10;
+  UnitCode units                   = 11;
+  uint32   filter                  = 12;
+  uint32   adjustedAd100Percentage = 13;
+  double   highReadingEu           = 14;
+  double   highAlarmEu             = 15;
+  double   highHighAlarmEu         = 16;
+  double   alarmDeadband           = 17;
+  uint32   mode                    = 18;
+  uint32   rawAdInput              = 19;
 }
 
 message PressureInputPointDefinition {
-  required string   pointTagId              = 1;
-  required uint32   scanPeriod              = 2;
-  required uint32   adjustedAd0Percentage   = 3;
-  required double   lowReadingEu            = 4;
-  required double   lowAlarmEu              = 5;
-  required double   lowLowAlarmEu           = 6;
-  required double   rateAlarmEu             = 7;
-  required double   filteredEuValue         = 8;
-  required uint32   alarmCode               = 9;
-  required uint32   actualScanTime          = 10;
-  required UnitCode units                   = 11;
-  required uint32   filter                  = 12;
-  required uint32   adjustedAd100Percentage = 13;
-  required double   highReadingEu           = 14;
-  required double   highAlarmEu             = 15;
-  required double   highHighAlarmEu         = 16;
-  required double   alarmDeadband           = 17;
-  required uint32   mode                    = 18;
-  required uint32   rawAdInput              = 19;
+  string   pointTagId              = 1;
+  uint32   scanPeriod              = 2;
+  uint32   adjustedAd0Percentage   = 3;
+  double   lowReadingEu            = 4;
+  double   lowAlarmEu              = 5;
+  double   lowLowAlarmEu           = 6;
+  double   rateAlarmEu             = 7;
+  double   filteredEuValue         = 8;
+  uint32   alarmCode               = 9;
+  uint32   actualScanTime          = 10;
+  UnitCode units                   = 11;
+  uint32   filter                  = 12;
+  uint32   adjustedAd100Percentage = 13;
+  double   highReadingEu           = 14;
+  double   highAlarmEu             = 15;
+  double   highHighAlarmEu         = 16;
+  double   alarmDeadband           = 17;
+  uint32   mode                    = 18;
+  uint32   rawAdInput              = 19;
 }
 
 
 message TemperatureInputPointDefinition {
-  required string   pointTagId              = 1;
-  required uint32   scanPeriod              = 2;
-  required uint32   adjustedAd0Percentage   = 3;
-  required double   lowReadingEu            = 4;
-  required double   lowAlarmEu              = 5;
-  required double   lowLowAlarmEu           = 6;
-  required double   rateAlarmEu             = 7;
-  required double   filteredEuValue         = 8;
-  required uint32   alarmCode               = 9;
-  required uint32   actualScanTime          = 10;
-  required UnitCode units                   = 11;
-  required uint32   filter                  = 12;
-  required uint32   adjustedAd100Percentage = 13;
-  required double   highReadingEu           = 14;
-  required double   highAlarmEu             = 15;
-  required double   highHighAlarmEu         = 16;
-  required double   alarmDeadband           = 17;
-  required uint32   mode                    = 18;
-  required uint32   rawAdInput              = 19;
+  string   pointTagId              = 1;
+  uint32   scanPeriod              = 2;
+  uint32   adjustedAd0Percentage   = 3;
+  double   lowReadingEu            = 4;
+  double   lowAlarmEu              = 5;
+  double   lowLowAlarmEu           = 6;
+  double   rateAlarmEu             = 7;
+  double   filteredEuValue         = 8;
+  uint32   alarmCode               = 9;
+  uint32   actualScanTime          = 10;
+  UnitCode units                   = 11;
+  uint32   filter                  = 12;
+  uint32   adjustedAd100Percentage = 13;
+  double   highReadingEu           = 14;
+  double   highAlarmEu             = 15;
+  double   highHighAlarmEu         = 16;
+  double   alarmDeadband           = 17;
+  uint32   mode                    = 18;
+  uint32   rawAdInput              = 19;
 }
 
 message GasCompositionInMole {
