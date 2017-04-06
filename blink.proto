@@ -29,6 +29,14 @@ message MeterRunEntry {
   required MeterRun meterInfo = 2;
 }
 
+
+// In order to pull out a periodic Volume report as a standalone piece of data to be serialized
+// There is a MeterRunPeriodicReport
+message MeterRunPeriodicReport {
+  required int64        key    = 1;
+  repeated VolumeReport report = 2;
+}
+
 // Message MeterRun defines the fields that make up a particular meter
 // For some meter types, the fields are optional and will
 // be listed as such.
@@ -57,7 +65,7 @@ message EFMReportInformation  {
 
   required string  meterDescription      = 1;
   required string  runSelected           = 2;
-  // NOTE: meter tag, contract hour
+  required uint32  contractHour          = 3;
 }
 
 // Message SystemParameters
