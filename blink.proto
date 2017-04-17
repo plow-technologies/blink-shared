@@ -15,12 +15,6 @@ message RocDevice {
 
 
 
-
-
-
-
-
-
 // Meter Run Entries are the Key-Value pairs that define meter runs
 // in the RocDevice
 message MeterRunEntry {
@@ -86,12 +80,12 @@ message SystemParameters {
 
 
 
-      // Nested Data Types
-      enum  RocDeviceType {
-              ROC103 = 1;
-              ROC104 = 2;
-              ROC107 = 3;
-              ROC800 = 4; }
+  // Nested Data Types
+  enum  RocDeviceType {
+    ROC103 = 1;
+    ROC104 = 2;
+    ROC107 = 3;
+    ROC800 = 4; }
 }
 
 
@@ -483,3 +477,30 @@ enum UnitCode {
   VOLTS     = 6;
   MILLIAMPS = 7;
 }
+
+
+
+// Status Service Codes
+/*
+  The status code provides the information,
+  extra information may be added for 
+*/
+message BlinkStatus {
+  oneof status {
+    Broadcasting        broadcasting   = 1;
+    ReadingDevice       reading        = 2;
+    ReadingDeviceError  readingError   = 3;
+    UsbSerialError      usbSerialError = 4;
+    SerialError         serialError    = 5;
+  }
+
+  message Broadcasting        {}
+  message ReadingDevice       {}
+  message ReadingDeviceError  {}
+  message UsbSerialError      {}
+  message SerialError         {}
+
+
+
+}
+  

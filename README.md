@@ -12,7 +12,7 @@ There are 4 primary services with the blink device.
 * The License service
 * The Status service
 * The Configuration Service
-
+* The Write Service
 Each advertise under their own specific uuid and can be discovered separately. 
 
 
@@ -20,6 +20,11 @@ Each advertise under their own specific uuid and can be discovered separately.
 ## Data Service
 The data service creates a bank of characteristics, dynamically sized to allow data
 to be sent.  This is the main routine.
+
+
+## Write Service
+
+Write data to a PLC 
 
 ## Status Service
 
