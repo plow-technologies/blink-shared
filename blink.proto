@@ -15,6 +15,12 @@ message RocDevice {
 
 
 
+
+
+
+
+
+
 // Meter Run Entries are the Key-Value pairs that define meter runs
 // in the RocDevice
 message MeterRunEntry {
@@ -80,12 +86,12 @@ message SystemParameters {
 
 
 
-  // Nested Data Types
-  enum  RocDeviceType {
-    ROC103 = 1;
-    ROC104 = 2;
-    ROC107 = 3;
-    ROC800 = 4; }
+      // Nested Data Types
+      enum  RocDeviceType {
+              ROC103 = 1;
+              ROC104 = 2;
+              ROC107 = 3;
+              ROC800 = 4; }
 }
 
 
@@ -487,20 +493,38 @@ enum UnitCode {
 */
 message BlinkStatus {
   oneof status {
-    Broadcasting        broadcasting   = 1;
-    ReadingDevice       reading        = 2;
-    ReadingDeviceError  readingError   = 3;
-    UsbSerialError      usbSerialError = 4;
-    SerialError         serialError    = 5;
+    Broadcasting                     broadcasting                  = 1;
+    ReadingDevice                    reading                       = 2;
+    ReadingDeviceError               readingError                  = 3;
+    UsbSerialError                   usbSerialError                = 4;
+    SerialError                      serialError                   = 5;
+    LicenseStoreNotFound             licenseStoreNotFound          = 6;
+    IncorrectDataType                incorrectDataType             = 7;
+    IncorrectDataTypePhysicalData    incorrectDataTypePhysicalData = 8;
+    Starting                         starting                      = 9;
   }
 
-  message Broadcasting        {}
-  message ReadingDevice       {}
-  message ReadingDeviceError  {}
-  message UsbSerialError      {}
-  message SerialError         {}
+  message Starting             {}
+  message Broadcasting         {}
+  message ReadingDevice        {}
+  message ReadingDeviceError   {}
+  message UsbSerialError       {}
+  message SerialError          {}
+  message LicenseStoreNotFound { required string errMsg = 1;}
+  message IncorrectDataType {
+     required uint32 pointType    = 1;
+     required uint32 logicalPoint = 2;
+     required uint32 paramNum     = 3;
+     required string dataFound    = 4;
+  }
+  message IncorrectDataTypePhysicalData {
+     required string physDataFound    = 1;
+  }
+
+
+
+
 
 
 
 }
-  
