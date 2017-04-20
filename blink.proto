@@ -506,7 +506,7 @@ message BlinkStatus {
 
   message Starting             {}
   message Broadcasting         {}
-  message ReadingDevice        {}
+  message ReadingDevice        {}  
   message ReadingDeviceError   {}
   message UsbSerialError       {}
   message SerialError          {}
@@ -521,10 +521,11 @@ message BlinkStatus {
      required string physDataFound    = 1;
   }
 
+}
 
-
-
-
-
-
+message WriteValue {
+    oneof write {
+       ResetDevice reset = 1;
+    }
+   message ResetDevice {}
 }

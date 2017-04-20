@@ -28,6 +28,12 @@ to be sent.  This is the main routine.
 
 Write data to a PLC 
 
+* Advertisement UUID: `2b1af31f-1c10-483f-b27c-41bad18e3286`
+* Primary Data Type : WriteValue
+
+### Uses
+* reset device and data
+
 ## Status Service
 The Status service will let the client know what sort of state the blink is currently in.
 
