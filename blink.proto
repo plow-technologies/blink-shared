@@ -14,7 +14,14 @@ message RocDevice {
 }
 
 
+message RocConfiguration {
+  required string      ssid = 1;
+  required string  password = 2;
+}
 
+message RocVersion {
+  required string  rocVersion = 3;
+}
 
 
 
