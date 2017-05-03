@@ -60,7 +60,7 @@ This service allows things like wifi and tried baud rates to be changed.
 * Advertisement UUID: `a9d064dd-6635-4a1f-97f9-4dd34132be86`
 * Primary Data Types : RocConfiguration and RocVersion
 
-# Characteristics
+#### Characteristics
 
 * UUID: `e12ab614-da73-42af-81e6-0a9311b076ba`
 * The first read characteristic should return `RocVersion`
