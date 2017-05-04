@@ -499,16 +499,19 @@ enum UnitCode {
   extra information may be added for 
 */
 message BlinkStatus {
+  optional uint64 currentRocTime = 1;
   oneof status {
-    Broadcasting                     broadcasting                  = 1;
-    ReadingDevice                    reading                       = 2;
-    ReadingDeviceError               readingError                  = 3;
-    UsbSerialError                   usbSerialError                = 4;
-    SerialError                      serialError                   = 5;
-    LicenseStoreNotFound             licenseStoreNotFound          = 6;
-    IncorrectDataType                incorrectDataType             = 7;
-    IncorrectDataTypePhysicalData    incorrectDataTypePhysicalData = 8;
-    Starting                         starting                      = 9;
+    Broadcasting                     broadcasting                  = 2;
+    ReadingDevice                    reading                       = 3;
+    ReadingDeviceError               readingError                  = 4;
+    UsbSerialError                   usbSerialError                = 5;
+    SerialError                      serialError                   = 6;
+    LicenseStoreNotFound             licenseStoreNotFound          = 7;
+    IncorrectDataType                incorrectDataType             = 8;
+    IncorrectDataTypePhysicalData    incorrectDataTypePhysicalData = 9;
+    Starting                         starting                      = 10;
+    CheckingTime                     checkingTime                  = 11;
+    CheckingTimeError                checkingTimeError             = 12;
   }
 
   message Starting             {}
@@ -516,6 +519,8 @@ message BlinkStatus {
   message ReadingDevice        {}  
   message ReadingDeviceError   {}
   message UsbSerialError       {}
+  message CheckingTime         {}
+  message CheckingTimeError    {}
   message SerialError          {}
   message LicenseStoreNotFound { required string errMsg = 1;}
   message IncorrectDataType {
