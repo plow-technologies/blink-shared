@@ -512,6 +512,7 @@ message BlinkStatus {
     Starting                         starting                      = 10;
     CheckingTime                     checkingTime                  = 11;
     CheckingTimeError                checkingTimeError             = 12;
+    LicenseNoReads                   licenseNoReads                = 13;
   }
 
   message Starting             {}
@@ -522,6 +523,7 @@ message BlinkStatus {
   message CheckingTime         {}
   message CheckingTimeError    {}
   message SerialError          {}
+  message LicenseNoReads       {}
   message LicenseStoreNotFound { required string errMsg = 1;}
   message IncorrectDataType {
      required uint32 pointType    = 1;
