@@ -1,0 +1,40 @@
+# Blink License
+
+The service has UUID 79e70e96-c0ae-439f-bf45-955755832ae6 with characteristics
+for the signature (d6b63b21-926d-4b90-b35e-90db7e213d7f) and license (58f5f662-8575-4734-ab7e-e4177f7c979c).
+
+To generate a new license you need the old license.
+
+To get the two parts of a license you can read the license characteristic at 58f5f662-8575-4734-ab7e-e4177f7c979c and
+the signature characteristic at d6b63b21-926d-4b90-b35e-90db7e213d7f. Coming from the blink these will be raw encoded.
+
+To post them to a server at "https://blinklicense.plowtech.net/generate" with the base64 encoded license and base64 encoded signature will return a new license.
+
+The post object should have a license and signature field with base64 encoded values:
+```
+{
+  "license": "...."
+, "signature": "...."
+}
+```
+
+the response of the post will either be something of the form
+```
+{
+  "license": "...."
+, "signature": "...."
+}
+```
+or
+```
+{
+  "failed": "..."
+}
+```
+with the reason given inside.
+
+After the new license is received you can write the new values to the respective characteristics. Both the license and the signature have to be decoded from base64 though.
+
+If both are sent to the device the license will be updated.
+
+You can get the amount of reads left from the 24728813-c501-485d-8356-4495e0e426cd characteristic. if -1 is returned, the current license is invalid.
