@@ -37,11 +37,17 @@ Write data to a PLC
 ## Status Service
 The Status service will let the client know what sort of state the blink is currently in.
 
-* Advertisement UUID: `0c139d79-a034-4884-9bcb-6401b746c66d`
-* Primary Data Type : BlinkStatus
++ Advertisement UUID: `0c139d79-a034-4884-9bcb-6401b746c66d`
++ Primary Data Type : BlinkStatus
++ Extra info held in the status:
+  * Current Epoch Time on the Roc Device
+  * Battery Percent as a decimal (1.0 being 100% charged)
+  * Charge Amps in mA
 
 ### Status Examples
 * Error, with error code
+* Checking Time
+* Checking Battery
 * Reading Data
 * Serving Data
 
