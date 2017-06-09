@@ -511,20 +511,24 @@ message BlinkStatus {
     IncorrectDataTypePhysicalData    incorrectDataTypePhysicalData = 9;
     Starting                         starting                      = 10;
     CheckingTime                     checkingTime                  = 11;
-    CheckingTimeError                checkingTimeError             = 12;
-    LicenseNoReads                   licenseNoReads                = 13;
+    CheckingBattery                  checkingBattery               = 12;
+    CheckingTimeError                checkingTimeError             = 13;
+    CheckingBatteryError             checkingBatteryError          = 14;
+    LicenseNoReads                   licenseNoReads                = 15;
   }
 
-  message Starting             {}
-  message Broadcasting         {}
-  message ReadingDevice        {}  
-  message ReadingDeviceError   {}
-  message UsbSerialError       {}
-  message CheckingTime         {}
-  message CheckingTimeError    {}
-  message SerialError          {}
-  message LicenseNoReads       {}
-  message LicenseStoreNotFound { required string errMsg = 1;}
+  message Starting               {}
+  message Broadcasting           {}
+  message ReadingDevice          {}  
+  message ReadingDeviceError     {}
+  message UsbSerialError         {}
+  message CheckingTime           {}
+  message CheckingBattery        {}
+  message CheckingTimeError      {}
+  message CheckingBatteryError   {}
+  message SerialError            {}
+  message LicenseNoReads         {}
+  message LicenseStoreNotFound   { required string errMsg = 1;}
   message IncorrectDataType {
      required uint32 pointType    = 1;
      required uint32 logicalPoint = 2;
@@ -534,7 +538,8 @@ message BlinkStatus {
   message IncorrectDataTypePhysicalData {
      required string physDataFound    = 1;
   }
-
+  optional double batteryPercent = 16;
+  optional double chargeCurrent  = 17;
 }
 
 message WriteValue {
