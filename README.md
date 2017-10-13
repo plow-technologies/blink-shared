@@ -69,6 +69,9 @@ This service allows things like wifi and tried baud rates to be changed.
 ### Characteristics
 
 * Read  `RocVersion`        UUID: `e12ab614-da73-42af-81e6-0a9311b076ba`
+  - This is GZip compressed
 * Read  `RocConfiguration`  UUID: `a4519451-5837-4687-873f-0dfef0a9a1b9`
+  - This is GZip compressed
 * Write `RocConfiguration`  UUID: `b2dd0114-7dc8-4c64-800e-1ea0e8ddf1a2`
+  - This is not compressed
 
