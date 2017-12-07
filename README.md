@@ -61,7 +61,7 @@ This service reads and writes license info
 
 
 ## Configuration Service
-This service allows things like wifi and tried baud rates to be changed.
+This service allows things like wifi and tried baud rates to be changed. There is also a characteristic for restarting the blink process
 
 * Service UUID: `a9d064dd-6635-4a1f-97f9-4dd34132be86`
 * Primary Data Types : RocConfiguration and RocVersion
