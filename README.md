@@ -68,7 +68,8 @@ This service allows things like wifi and tried baud rates to be changed.
 
 ### Characteristics
 
-* Read  `RocVersion`        UUID: `e12ab614-da73-42af-81e6-0a9311b076ba`
-* Read  `RocConfiguration`  UUID: `a4519451-5837-4687-873f-0dfef0a9a1b9`
-* Write `RocConfiguration`  UUID: `b2dd0114-7dc8-4c64-800e-1ea0e8ddf1a2`
+* Read `Restart blink process` UUID: `da892460-e203-4937-80b0-172cc3f892d9`
+* Read  `RocVersion`           UUID: `e12ab614-da73-42af-81e6-0a9311b076ba`
+* Read  `RocConfiguration`     UUID: `a4519451-5837-4687-873f-0dfef0a9a1b9`
+* Write `RocConfiguration`     UUID: `b2dd0114-7dc8-4c64-800e-1ea0e8ddf1a2`
 
