@@ -15,8 +15,10 @@ message RocDevice {
 
 
 message RocConfiguration {
-  required string      ssid = 1;
-  required string  password = 2;
+  required string  ssid           = 1;
+  required string  password       = 2;
+  required double  batteryPercent = 3;
+  required double  chargeCurrent  = 4;
 }
 
 message RocVersion {
@@ -511,9 +513,7 @@ message BlinkStatus {
     IncorrectDataTypePhysicalData    incorrectDataTypePhysicalData = 9;
     Starting                         starting                      = 10;
     CheckingTime                     checkingTime                  = 11;
-    CheckingBattery                  checkingBattery               = 12;
     CheckingTimeError                checkingTimeError             = 13;
-    CheckingBatteryError             checkingBatteryError          = 14;
     LicenseNoReads                   licenseNoReads                = 15;
   }
 
@@ -523,9 +523,7 @@ message BlinkStatus {
   message ReadingDeviceError     {}
   message UsbSerialError         {}
   message CheckingTime           {}
-  message CheckingBattery        {}
   message CheckingTimeError      {}
-  message CheckingBatteryError   {}
   message SerialError            {}
   message LicenseNoReads         {}
   message LicenseStoreNotFound   { required string errMsg = 1;}
@@ -538,8 +536,6 @@ message BlinkStatus {
   message IncorrectDataTypePhysicalData {
      required string physDataFound    = 1;
   }
-  optional double batteryPercent = 16;
-  optional double chargeCurrent  = 17;
 }
 
 message WriteValue {
