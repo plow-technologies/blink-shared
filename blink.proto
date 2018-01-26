@@ -19,6 +19,7 @@ message RocConfiguration {
   required string  password       = 2;
   required double  batteryPercent = 3;
   required double  chargeCurrent  = 4;
+  required bool    wifiConnected  = 5;
 }
 
 message RocVersion {
