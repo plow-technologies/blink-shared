@@ -26,6 +26,9 @@ message RocVersion {
   required string  rocVersion = 3;
 }
 
+message ResetResponse {
+  optional string errMsg = 2;
+}
 
 
 
