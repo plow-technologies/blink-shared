@@ -27,7 +27,7 @@ message RocVersion {
 }
 
 message ResetResponse {
-  optional string errMsg = 2;
+  optional string errMsg = 1;
 }
 
 
