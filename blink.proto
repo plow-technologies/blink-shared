@@ -519,6 +519,9 @@ message BlinkStatus {
     CheckingTime                     checkingTime                  = 11;
     CheckingTimeError                checkingTimeError             = 13;
     LicenseNoReads                   licenseNoReads                = 15;
+    ResettingDeviceInProgress        resettingDeviceInProgress     = 16;
+    SuccessResettingDevice           successResettingDevice        = 17;
+    FailureResettingDevice           failureResettingDevice        = 18;
   }
 
   message Starting               {}
@@ -530,6 +533,9 @@ message BlinkStatus {
   message CheckingTimeError      {}
   message SerialError            {}
   message LicenseNoReads         {}
+  message ResettingDeviceInProgress {}
+  message SuccessResettingDevice {}
+  message FailureResettingDevice { required string resetFailureMsg = 1;}
   message LicenseStoreNotFound   { required string errMsg = 1;}
   message IncorrectDataType {
      required uint32 pointType    = 1;
