@@ -24,15 +24,13 @@ to be sent.  This is the main routine.
 * Advertisement UUID: `aa4d6e22-badf-4983-8b45-04b9f55f6e0a`
 * Primary Data Type: MeterRunPeriodicReport
 
-## Write Service
+## Reset Service
 
-Write data to a PLC 
+* Advertisement UUID: `ab8ce084-ee44-446d-aaf8-0686f2d802c8`
+* Primary Data Type : `ResetResponse`
 
-* Advertisement UUID: `2b1af31f-1c10-483f-b27c-41bad18e3286`
-* Primary Data Type : WriteValue
-
-### Uses
-* reset device and data
+### Characteristics
+* Read "Reset Device` UUID: `7d68f59b-8717-42f5-98d4-b3cb2260b3fd`
 
 ## Status Service
 The Status service will let the client know what sort of state the blink is currently in.
