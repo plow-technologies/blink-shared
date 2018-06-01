@@ -30,7 +30,9 @@ to be sent.  This is the main routine.
 * Primary Data Type : `ResetResponse`
 
 ### Characteristics
-* Read `Reset Device` UUID: `7d68f59b-8717-42f5-98d4-b3cb2260b3fd`
++ Read `Reset Device` UUID: `7d68f59b-8717-42f5-98d4-b3cb2260b3fd`
+  * returns a ResetResponse which has an optional error message returned on failure
+  * on success, the ResetResponse will not contain the optional error message
 
 ## Status Service
 The Status service will let the client know what sort of state the blink is currently in.
